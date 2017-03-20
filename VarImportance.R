@@ -8,7 +8,6 @@ rankImportance <- varImportance %>%
 ggplot(rankImportance, aes(x = reorder(Variables,Importance), y = Importance,
                           fill = Importance)) + geom_bar(stat = 'identity') +
             geom_text(aes(x = Variables, y = 0.5, label = Rank),
-                      colour = 'red') + 
-  coord_flip()
+                      colour = 'red') + coord_flip()
 
 
