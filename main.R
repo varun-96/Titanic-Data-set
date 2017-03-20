@@ -27,6 +27,7 @@ train2$Title[train2$Title %in% drare] = "Rare_Title"
 
 train3 = subset(train2, select = -c(Cabin, Parch,Ticket))
 
+#Logistic Regression
 survlog = glm(Survived ~ Pclass + Sex + Age + SibSp + Embarked + Title, family = "binomial", data = train3)
 
 test1 = test
@@ -40,6 +41,7 @@ predsurvlog = predict(survlog, newdata = test1, type = "response")
 
 
 #Decision Tree
+
 library(rpart)
 library(rpart.plot)
 
@@ -56,6 +58,7 @@ ggplot(train3, aes(x = SibSp, y = Age)) + geom_point(aes(color = Survived))
 
 
 surnCart = rpart(Survived~ Pclass + Sex + Age + SibSp + Embarked + Title, data = train3, method = "class")
+prp(surnCart)
 predCa = predict(surnCart, newdata = test1)[,2]
 submissionCart = data.frame(PassengerId = test1$PassengerId, Survived = predCa)
 
